@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import Parking
+from .views import Parkingsys
+
 
 urlpatterns=[
-    path('park/',Parking.as_view())
+    path('park/',Parkingsys.as_view())
 
 ]
