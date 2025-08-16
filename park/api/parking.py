@@ -1,10 +1,10 @@
 #code for 100 vehicle parking[python and mysql.]
-import sql_test
+from . import sqltest
 
-class Parking:
+class Parkings:
     def __init__(self):
 
-        self.p=sql_test.Server()
+        self.p=sqltest.Server()
 
     def park(self,carno):
 
@@ -48,7 +48,7 @@ class Parking:
 
 def main():
 
-    q = Parking()
+    q = Parkings()
     while True:
 
         no=int(input("\n1:park\n2:depart\n3.quit app\nenter a val:"))
