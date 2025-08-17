@@ -1,77 +1,224 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Space+Grotesk%3Awght%40400%3B500%3B700"
-    />
+{% load static %}
 
-    <title>Stitch Design</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parking System</title>
+  <style>
+    /* Modern fresh color palette inspired by 2025 trends */
+    :root {
+      --color-bg: #f9fafb;
+      --color-primary: #4b6cb7; /* Calm blue */
+      --color-primary-light: #182848;
+      --color-accent: #ff6f91; /* Soft coral pink */
+      --color-accent-light: #ffa5b4;
+      --color-text-dark: #2e2e2e;
+      --color-text-light: #666;
+      --color-shadow: rgba(75, 108, 183, 0.3);
+    }
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div
-      class="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden"
-      style='--select-button-svg: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(115,115,115)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e"); font-family: "Space Grotesk", "Noto Sans", sans-serif;'
-    >
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#141414]">
-            <div class="size-4">
-              <!-- Your SVG logo here -->
-            </div>
-            <h2 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">ParkSmart</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <button
-              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#ededed] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
-            >
-              <!-- Gear Icon -->
-            </button>
-            <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD8AINOXhwtWG5iNQdjV17IYME5mJTLWshFzJj9oeJhGjH4GynmEFvv7_H0gvF1pjyZox4G7KxDa_ukvy7Dvbih3ZC3XIKlTPjN1kGrVTWZbGisFrv8boDVxnhceQ4Fyzz-1dG4Vfu9vXWVlGGeKdJK-VJHxKnsmAmiWwpkz7bdvWlwssufwLVoXkM_fdpMbDVY1xe4lupd_3yD9dtReqisyeFrJ1nnpI3nyT2ENdStT_Oh75QGniCfRXT4XGAOQRtn88KMmMIE9Lc");'
-            ></div>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <h2 class="text-[#141414] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
-              Welcome to City Center Parking
-            </h2>
+    /* Elegant minimal reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
 
-            <!-- Your form and options here -->
+    body {
+      background: var(--color-bg);
+      color: var(--color-text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 2rem;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-            <h3 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Parking Rates</h3>
-            <!-- Rates list here -->
+    main {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px var(--color-shadow);
+      padding: 2.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-            <h3 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Discounts</h3>
-            <!-- Discounts list here -->
+    /* Abstract organic shape as background accent */
+    main::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -120px;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+      border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      z-index: 0;
+      transform: rotate(45deg);
+    }
 
-            <!-- ✅ Modified Section with "Proceed to Payment" and "Depart" buttons -->
-            <div class="flex px-4 py-3 gap-4">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-black text-neutral-50 text-base font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Proceed to Payment</span>
-              </button>
+    h1 {
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: 1.5px;
+      position: relative;
+      z-index: 1;
+      color: var(--color-primary-light);
+    }
 
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#ededed] text-[#141414] text-base font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Depart</span>
-              </button>
-            </div>
-            <!-- End of Button Section -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+    form {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(75, 108, 183, 0.15);
+      margin-bottom: 2rem;
+      padding: 1.8rem 2rem;
+      z-index: 1;
+      position: relative;
+      transition: box-shadow 0.3s ease;
+    }
+
+    form:hover {
+      box-shadow: 0 20px 40px rgba(75, 108, 183, 0.3);
+    }
+
+    form h3 {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+      letter-spacing: 0.8px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      color: var(--color-primary-light);
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #e0e6f2;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      font-weight: 500;
+      color: var(--color-text-dark);
+      background-color: #fff;
+      outline-offset: 2px;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 12px var(--color-accent-light);
+      outline: none;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px 0;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 20px var(--color-shadow);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    button:hover,
+    button:focus {
+      background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+      box-shadow: 0 12px 36px var(--color-shadow);
+      outline: none;
+    }
+
+    /* Exit button style different for emphasis */
+    #exit-button {
+      margin-top: 1rem;
+      background: #ff4b5c;
+      box-shadow: 0 6px 20px rgba(255, 75, 92, 0.3);
+    }
+
+    #exit-button:hover,
+    #exit-button:focus {
+      background: #e03e4c;
+      box-shadow: 0 12px 36px rgba(224, 62, 76, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      main {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+        margin: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Parking Management</h1>
+
+    <form id="parkForm" action="/park"  autocomplete="off" novalidate>
+      <h3>Park Vehicle</h3>
+      <label for="licensePlatePark">License Plate Number</label>
+      <input
+        type="text"
+        id="licensePlatePark"
+        name="licensePlate"
+        placeholder="Enter license plate"
+        required
+        pattern="[A-Za-z0-9\s\-]+"
+        title="License plate can contain letters, numbers, spaces or hyphens"
+      />
+      <button type="submit">Park</button>
+    </form>
+
+    <form id="departForm" action="/depart"  autocomplete="off" novalidate>
+      <h3>Depart Vehicle</h3>
+      <label for="licensePlateDepart">License Plate Number</label>
+      <input
+        type="text"
+        id="licensePlateDepart"
+        name="licensePlate"
+        placeholder="Enter license plate"
+        required
+        pattern="[A-Za-z0-9\s\-]+"
+        title="License plate can contain letters, numbers, spaces or hyphens"
+      />
+
+      <button type="submit">Depart</button>
+    </form>
+
+    <form action="/exit" method="post" autocomplete="off">
+      <button id="exit-button" type="submit">Exit</button>
+    </form>
+  </main>
+<script src="{% static 'javascript/practice.js' %}"></script>
+</body>
 </html>
