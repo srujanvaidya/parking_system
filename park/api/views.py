@@ -22,10 +22,7 @@ class Parkingsys(APIView):
 
 class Parks(APIView):
 
-    def get(self, request):
-        park = Park.objects.all()
-        serializer = PlateSerializer(park, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def post(self,request):
         serializer= PlateInputSerializer(data=request.data)
@@ -39,10 +36,7 @@ class Parks(APIView):
 
 class Exit(APIView):
 
-    def get(self, request):
-        park = Park.objects.all()
-        serializer = PlateSerializer(park, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def post(self,request):
         serializer=PlateInputSerializer(data=request.data)
