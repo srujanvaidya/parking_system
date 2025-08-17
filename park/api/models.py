@@ -1,8 +1,11 @@
 from django.db import models
 
 class Park(models.Model):
-    plate = models.CharField(max_length=20)
+    carno = models.CharField(max_length=20)
+    slot = models.IntegerField(unique=True,primary_key=True)
 
 
-def __str__(self):
-    return self.plate
+
+
+    class Meta:
+        db_table='lot'

@@ -31,10 +31,11 @@ class Parkings:
                 print("\nparking is full")
                 print("\n no available slots")
 
-    def depart(self):
+    def depart(self,carex):
+
         print('occupied slots',self.p.find())
 
-        carex =str(input("Enter car no"))
+
         slot = self.p.find()
         for slots,car in slot:
 
@@ -58,7 +59,8 @@ def main():
                 q.park(carno)
 
             case 2:
-                q.depart()
+                carex = str(input("Enter car no"))
+                q.depart(carex)
 
             case 3:
                 print("quit applicaiton")

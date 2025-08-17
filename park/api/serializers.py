@@ -1,11 +1,12 @@
 from rest_framework import serializers
 from .models import Park
 
-class PlateSerializer(serializers.Serializer):
-    id=serializers.IntegerField()
-    plate=serializers.CharField(max_length=11)
+class PlateInputSerializer(serializers.Serializer):
+    carno=serializers.CharField(max_length=11)
 
-class Plate1Serializer(serializers.ModelSerializer):
+class PlateSerializer(serializers.ModelSerializer):
     class Meta:
+        slot = serializers.IntegerField()
+        carno = serializers.CharField(max_length=11)
         model= Park
         fields = "__all__"
