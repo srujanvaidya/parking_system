@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'park.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'parking',      # Your MySQL DB name
+        'USER': 'root',         # e.g. root
+        'PASSWORD': 'srujanvaidya', # password for MySQL user
+        'HOST': 'localhost',               # or 'localhost'
+        'PORT': '3306',                    # default MySQL port
     }
 }
 
