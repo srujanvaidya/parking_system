@@ -1,0 +1,1 @@
+A simple Parking System that helps manage vehicle entries, exits, and parking slot allocations. This is a prototype project built to demonstrate efficient space utilization, record-keeping, and real-time parking status monitoring.
